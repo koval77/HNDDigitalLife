@@ -68,14 +68,12 @@ function draw() {
     var where=createVector(mouseX,mouseY);
 //    displaying amount of herbivores using plan, "vanilla" javascript
     document.getElementById("hl").innerHTML = "Herbivores alive: "+herbivores.length;
-//  greeting.position(1200, 5);
     //    displaying amount of carnivores using javascript
     document.getElementById("cl").innerHTML = "\nCarnivores alive: "+carnivores.length;
     if (choice==3){  // lerp() calculates a number between two numbers at a specific increment.
   // The amt parameter is the amount to interpolate between the two values
   // where 0.0 equal to the first point, 0.1 is very near the first point, 0.5
   // is half-way in between, etc.
-
   // Here we are moving 5% of the way to the mouse location each frame
   xl = lerp(xl, mouseX, 0.05);
   yl = lerp(yl, mouseY, 0.05);
@@ -88,24 +86,19 @@ function draw() {
     }
 
   if (random(1) < 0.1) {
-    var x = random(width);
-    var y = random(height);
+    var x = random(width-25);
+    var y = random(height-25);
     food.push(createVector(x, y));
   }
 
   if (random(1) < 0.001) {
-    var x = random(width);
-    var y = random(height);
+    var x = random(width-25);
+    var y = random(height-25);
     poison.push(createVector(x, y));
   }
 
 
   for (var i = 0; i < food.length; i++) {
-//    fill(0, 255, 0);
-//    noStroke();
-//      noFill();
-//    stroke(2,255,134);
-//    strokeWeight(1);
     beginShape();
          stroke(112,255,134);
     strokeWeight(1);
@@ -114,21 +107,23 @@ function draw() {
       ellipse(food[i].x+15,food[i].y,5,10);
       noFill();
       arc(food[i].x+32,food[i].y+5, 40, 50, PI, PI + QUARTER_PI);
-//    vertex(5, -this.r * 2);
-//    vertex(-this.r, this.r * 2);
-//    vertex(this.r, this.r * 2);
     endShape(CLOSE);
-    //ellipse(food[i].x, food[i].y, 4, 4);
   }
 
   for (var i = 0; i < poison.length; i++) {
     fill(255, 0, 0);
     noStroke();
-    ellipse(poison[i].x, poison[i].y, 8, 8);
+      beginShape();
+    ellipse(poison[i].x, poison[i].y, 6, 6);
+      fill(255,50,150);
+      ellipse(poison[i].x,poison[i].y,20,3);
+      ellipse(poison[i].x,poison[i].y,3,20);
+      endShape(CLOSE);
+      noFill();
   }
 
   for (var i = herbivores.length - 1; i >= 0; i--) {
-    herbivores[i].boundaries();
+    herbivores[i].boundariesh();
 //      herbivores[i].ageing();
       //when user clicks "Taunt Herbivores" button all herbivores will navigate to "where" vector
       if (choice==3){herbivores[i].seek2(where);
@@ -136,6 +131,7 @@ function draw() {
     herbivores[i].display();
                     }
       if(choice!==3){
+          herbivores[i].boundariesh();
     herbivores[i].behaviours(food, poison);
     herbivores[i].update();
     herbivores[i].display();}

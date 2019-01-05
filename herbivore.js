@@ -1,11 +1,10 @@
 //hMC-herbivore mutation probablity factor
 let hMC = 0.01;
-//testing
 class Herbivore{
     constructor(x,y,chromosome){
   this.position = createVector(x, y);
-  this.velocity = createVector(0, -1);
-  this.acceleration = createVector(0, 0);
+  this.velocity = createVector(x/1000, y/1000);
+  this.acceleration = createVector(0, 0.);
         //size
   this.r = 5;
         //mass, the heavier the object to more difficult is to steer it
@@ -186,7 +185,7 @@ console.log("desired before setmag: "+desired);
     pop();
   }
 
-  boundaries() {
+  boundariesh() {
     var frontier = 24;
     var desired = null;
     if (this.position.x < frontier) {
