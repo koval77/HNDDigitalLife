@@ -96,6 +96,7 @@ this.mass=0.3;
     var positiveSteer = this.eat(positive, 0.2, this.chromosome[2]);
     var negativeSteer = this.eat(negative, -1, this.chromosome[3]);
     var steerFollow=this.eat
+    //here dna will affect steering behaviours
     positiveSteer.mult(this.chromosome[0]);
     negativeSteer.mult(this.chromosome[1]);
     this.applyForce(positiveSteer);

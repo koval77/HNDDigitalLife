@@ -60,6 +60,10 @@ function mouseDragged() {if (choice==1){
 }
 function draw() {
   background(51);
+       fill(255, 100);
+    text("Herbivores alive: "+herbivores.length , 10, 15);
+     fill(255, 100);
+    text("Carnivores alive: "+carnivores.length , 10, 30);
     //declaring variable "where". i will use it late to reference a "decoy point" towards all herbivores will be going
     var where=createVector(mouseX,mouseY);
 //    displaying amount of herbivores using plan, "vanilla" javascript
