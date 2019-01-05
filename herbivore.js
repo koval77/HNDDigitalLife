@@ -1,6 +1,6 @@
 //hMC-herbivore mutation probablity factor
 let hMC = 0.01;
-
+//testing
 class Herbivore{
     constructor(x,y,chromosome){
   this.position = createVector(x, y);
@@ -95,7 +95,7 @@ this.mass=0.3;
   behaviours(positive, negative) {
     var positiveSteer = this.eat(positive, 0.2, this.chromosome[2]);
     var negativeSteer = this.eat(negative, -1, this.chromosome[3]);
-    var steerFollow=this.eat;
+    var steerFollow=this.eat
     positiveSteer.mult(this.chromosome[0]);
     negativeSteer.mult(this.chromosome[1]);
     this.applyForce(positiveSteer);
