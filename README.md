@@ -1,2 +1,2 @@
-# HNDDigitalLife
-School project about digital life simulation. It uses P5 JavaScript framework.
+# Artificial-Life-Project
+Simulation of simple digital ecosystem. Based on similar program from Nature of Code using p5.js.
