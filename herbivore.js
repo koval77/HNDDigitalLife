@@ -1,10 +1,11 @@
 //hMC-herbivore mutation probablity factor
 let hMC = 0.01;
+
 class Herbivore{
     constructor(x,y,chromosome){
   this.position = createVector(x, y);
-  this.velocity = createVector(x/1000, y/1000);
-  this.acceleration = createVector(0, 0.);
+  this.velocity = createVector(0, -1);
+  this.acceleration = createVector(0, 0);
         //size
   this.r = 5;
         //mass, the heavier the object to more difficult is to steer it
@@ -55,7 +56,7 @@ this.mass=0.3;
     }
        this.chromosome[6] = chromosome[6];
     if (random(1) < hMC) {
-      this.chromosome[6] += 0.001*random(1,6);
+      this.chromosome[6] = 0.001*random(1,6);
     }
   }
      //maxspeed depends on how much luck/skill points animal has
@@ -70,13 +71,16 @@ this.mass=0.3;
   update() {
       //losing weight and health over time
       this.mass-=0.002;
-    this.health -= 0.003;this.chromosome[6];
+    this.health -= 0.003;
+      //*this.chromosome[6];
     // updating velocity of the herbivore object
     this.velocity.add(this.acceleration);
     // limiting speed of the object
     this.velocity.limit(this.maxspeed);
       //updating position of the object
     this.position.add(this.velocity);
+      this.position.x = constrain(this.position.x, 0, width);
+    this.position.y = constrain(this.position.y, 0, height);
     // resetting acceleratione for each new cycle
     this.acceleration.mult(0);
       //incrementing age
@@ -94,8 +98,7 @@ this.mass=0.3;
   behaviours(positive, negative) {
     var positiveSteer = this.eat(positive, 0.2, this.chromosome[2]);
     var negativeSteer = this.eat(negative, -1, this.chromosome[3]);
-    var steerFollow=this.eat
-    //here dna will affect steering behaviours
+    var steerFollow=this.eat;
     positiveSteer.mult(this.chromosome[0]);
     negativeSteer.mult(this.chromosome[1]);
     this.applyForce(positiveSteer);
@@ -110,19 +113,19 @@ this.mass=0.3;
     }
   }
 
-  eat(list, energyValue, perception) {
+  eat(aims, energyValue, perception) {
     var record = Infinity;
     var closest = null;
-    for (var i = list.length - 1; i >= 0; i--) {
-      var d = this.position.dist(list[i]);
+    for (var i = aims.length - 1; i >= 0; i--) {
+      var d = this.position.dist(aims[i]);
       if (d < this.maxspeed) {
-        list.splice(i, 1);
+        aims.splice(i, 1);
         this.health += energyValue;
           this.mass+=5;
       } else {
         if (d < record && d < perception) {
           record = d;
-          closest = list[i];
+          closest = aims[i];
         }
       }
     }
@@ -186,7 +189,7 @@ console.log("desired before setmag: "+desired);
   }
 
   boundariesh() {
-    var frontier = 24;
+    var frontier = 20;
     var desired = null;
     if (this.position.x < frontier) {
       desired = createVector(this.maxspeed, this.velocity.y);
@@ -205,5 +208,5 @@ console.log("desired before setmag: "+desired);
       steer.limit(this.maxforce);
       this.applyForce(steer);
     }
-  }
-}
+  }//function boundareh ends
+}//class Herbivore ends
