@@ -1,6 +1,5 @@
 //carnivore mutation rate constant
 let cMC = 0.01;
-//testinggithuvb
 function Carnivore(x, y, chromosome) {
     this.acceleration = createVector(0, 0);
     this.velocity = createVector(0, -2);
@@ -62,7 +61,7 @@ function Carnivore(x, y, chromosome) {
     }
 
     this.applyForce = function(force) {
-        // it is possible to include mass in calculations(A = F / M)
+        // it is possible to include mass in calculations(A = F / M)(ToDo)
         this.acceleration.add(force);
     }
 
@@ -150,7 +149,7 @@ function Carnivore(x, y, chromosome) {
         }
 
         var gr = color(0, 0, 255);
-        var rd = color(0, 0, 0);
+        var rd = color(255, 0, 0);
         var col = lerpColor(rd, gr, this.health);
 
         fill(col);

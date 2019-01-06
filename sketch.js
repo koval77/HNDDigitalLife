@@ -2,6 +2,7 @@
 var [herbivores,food,poison,carnivores]=[[],[],[],[]]
 //declaring variables for UI functions
 var [choice,xl,yl]=[0,0,0]
+
 function setup() {
 var cnv = createCanvas(windowWidth, windowHeight);
   cnv.style('display', 'block');
@@ -35,7 +36,7 @@ function mouseDragged() {if (choice==1){
                          else if(choice==2){carnivores.push(new Carnivore(mouseX, mouseY));}
                          else if(choice==4){poison.push(createVector(mouseX,mouseY));}}
 function draw() {
-  background(51);
+  background(10,12,60);
        fill(255, 100);
     text("Herbivores alive: "+herbivores.length , 10, 15);
      fill(255, 100);
@@ -55,9 +56,11 @@ function draw() {
   yl = lerp(yl, mouseY, 0.05);
   fill(255);stroke(255);ellipse(xl, yl, 66, 66);
         herbivores.forEach(pro);}
+    //generating food
   if (random(1) < 0.1) {var x = random(10,width-10);var y = random(10,height-10);food.push(createVector(x, y));}
   if (random(1) < 0.001) {var x = random(width);var y = random(height);poison.push(createVector(x, y));}
   for (var i = 0; i < food.length; i++) {
+      //drawing food shape.
     beginShape();
          stroke(112,255,134);
     strokeWeight(1);
@@ -80,21 +83,22 @@ function draw() {
       noFill();
   }
   for (var i = herbivores.length - 1; i >= 0; i--) {
-    herbivores[i].boundariesh();
+    herbivores[i].boundariesv2();
 //      herbivores[i].ageing();
       //when user clicks "Taunt Herbivores" button all herbivores will navigate to "where" vector
       if (choice==3){herbivores[i].seek2(where);
     herbivores[i].update();
     herbivores[i].display();}
       if(choice!==3){
-          herbivores[i].boundariesh();
+          herbivores[i].boundariesv2();
     herbivores[i].behaviours(food, poison);
     herbivores[i].update();
     herbivores[i].display();}
+      herbivores[i].boundariesv2();
     var newHerbivore = herbivores[i].clone();
     if (newHerbivore != null) {
       herbivores.push(newHerbivore);
-        console.log("sketch142, new herbivore is being cloned");
+        console.log("sketch142, new herbivore is being cloned here!");
     }
     if (herbivores[i].dead()) {
       var x = herbivores[i].position.x;
