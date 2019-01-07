@@ -23,7 +23,7 @@ this.mass=0.3;this.age=1;this.chromosome = [];
       //affectin rate of hunger
       this.chromosome[6]=0.001*random(1,4);
   } else {
-    // Mutation
+    // Mutation. ToDo make parameters be dependend on each other
     this.chromosome[0] = chromosome[0];if (random(1) < hMC) {this.chromosome[0] += random(-0.1, 0.1);}
     this.chromosome[1] = chromosome[1];if (random(1) < hMC) {this.chromosome[1] += random(-0.1, 0.1);}
     this.chromosome[2] = chromosome[2];if (random(1) < hMC) {this.chromosome[2] += random(-10, 10);}
@@ -66,7 +66,6 @@ this.mass=0.3;this.age=1;this.chromosome = [];
       return null;
     }
   }
-
   applyForce(force) {
       console.log("force is: "+force);
       // includind mass in calculations(a = f/m => f = a*m)
@@ -156,6 +155,15 @@ console.log("desired before setmag: "+desired);
     endShape(CLOSE);
     pop();
   }
+    //todo
+    checkForPredators(){
+        for(var i=1;carnivores.length;i++){
+            var d = this.position.dist(carnivores[i]);
+            if(d<20){
+                this.velocity.x=this.velocity.x*(-1);
+            }
+        }
+    }
     //if animal is going out of the screen revers its velocity
 boundariesv2(){
     if ((this.position.x > width-5) || (this.position.x < 5)) {
