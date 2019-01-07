@@ -94,6 +94,7 @@ function draw() {
     herbivores[i].behaviours(food, poison);
     herbivores[i].update();
     herbivores[i].display();}
+      herbivores[i].checkForPredators();
       herbivores[i].boundariesv2();
     var newHerbivore = herbivores[i].clone();
     if (newHerbivore != null) {

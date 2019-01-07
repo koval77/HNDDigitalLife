@@ -155,11 +155,11 @@ console.log("desired before setmag: "+desired);
     endShape(CLOSE);
     pop();
   }
-    //todo
+    //running from predatores
     checkForPredators(){
-        for(var i=1;carnivores.length;i++){
-            var d = this.position.dist(carnivores[i]);
-            if(d<20){
+        for(var i = carnivores.length - 1; i >= 0; i--){
+            var d = this.position.dist(carnivores[i].position);
+            if(d<50){
                 this.velocity.x=this.velocity.x*(-1);
             }
         }
