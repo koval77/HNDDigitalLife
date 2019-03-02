@@ -1,14 +1,12 @@
 //carnivore mutation rate constant
 let cMC = 0.01;
-//testinggithuvb
 function Carnivore(x, y, chromosome) {
     this.acceleration = createVector(0, 0);
     this.velocity = createVector(0, -2);
     this.position = createVector(x, y);
     this.r = 4;
     this.maxhealth = 1;
-    this.mass=2;
-    this.age=1
+    this.age=1;
     this.chromosome = [];
     if (chromosome === undefined) {
        //general "luck" of the animal estimated as numbers of skill points, amount of skill points animal has, translate to his chances for survival
@@ -19,6 +17,8 @@ function Carnivore(x, y, chromosome) {
         this.chromosome[2] = random(-2, 2);
          // MaxSpeed gene
         this.chromosome[3]=random(1,6);
+        //general "luck" of the animal estimated as numbers of skill points, amount of skill points animal has, translate to his chances for survival
+        this.chromosome[4] = random(10, 20);
     } else {
         // mutating
         this.chromosome[0] = chromosome[0];
@@ -36,6 +36,9 @@ function Carnivore(x, y, chromosome) {
         }
         if (random(1) < cMC) {
             this.chromosome[3] += random(-1, 1);
+        }
+        if (random(1) < cMC) {
+            this.chromosome[4] += random(10, 20);
         }
     }
     //maxspeed depends on how much luck/skill points animal has
@@ -62,7 +65,6 @@ function Carnivore(x, y, chromosome) {
     }
 
     this.applyForce = function(force) {
-        // it is possible to include mass in calculations(A = F / M)
         this.acceleration.add(force);
     }
 
@@ -79,6 +81,16 @@ function Carnivore(x, y, chromosome) {
         positiveSteer.mult(this.chromosome[2]);
         this.applyForce(positiveSteer);
     }
+//    this.behaviours=function(positive, negative) {
+//    var positiveSteer = this.eat(positive, 0.2, this.chromosome[2]);
+//    var negativeSteer = this.eat(negative, -1, this.chromosome[3]);
+//    var steerFollow=this.eat;
+//      //applaying genetic traits
+//    positiveSteer.mult(this.chromosome[0]);
+//    negativeSteer.mult(this.chromosome[1]);
+//    this.applyForce(positiveSteer);
+//    this.applyForce(negativeSteer);
+//  }
 
 
     this.eat = function(energyValue, perception) {
@@ -150,7 +162,7 @@ function Carnivore(x, y, chromosome) {
         }
 
         var gr = color(0, 0, 255);
-        var rd = color(0, 0, 0);
+        var rd = color(255, 0, 0);
         var col = lerpColor(rd, gr, this.health);
 
         fill(col);
