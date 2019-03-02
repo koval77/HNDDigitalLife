@@ -6,8 +6,7 @@ function Carnivore(x, y, chromosome) {
     this.position = createVector(x, y);
     this.r = 4;
     this.maxhealth = 1;
-    this.mass=2;
-    this.age=1
+    this.age=1;
     this.chromosome = [];
     if (chromosome === undefined) {
        //general "luck" of the animal estimated as numbers of skill points, amount of skill points animal has, translate to his chances for survival
