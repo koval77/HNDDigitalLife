@@ -4,14 +4,15 @@ var [herbivores,food,poison,carnivores]=[[],[],[],[]]
 var [choice,xl,yl]=[0,0,0]
 
 function setup() {
-var cnv = createCanvas(windowWidth, windowHeight);
-  cnv.style('display', 'block');
+//var cnv = createCanvas(windowWidth, windowHeight);
+//  cnv.style('display', 'block');
     //variable for St Patrick's logo
-    img=createImg("stplogo.png");
+//    img=createImg("stplogo.png");
     //Creating variable for canvas
      var myCanvas = createCanvas(1200, 720);
+    myCanvas.style('display','block');
     //positioning logo
-    img.position(1020, 0);img.size(200, 150);
+//    img.position(1020, 0);img.size(200, 150);
     //creating buttons and linking them with functions
       button = createButton('Create Herbivore');button.mousePressed(togH);
     button = createButton('Create Carnivore');button.mousePressed(togC);
@@ -27,7 +28,7 @@ var cnv = createCanvas(windowWidth, windowHeight);
 greeting = createElement('h2', 'HERBIVORES ALIVE:  '+herbivores.length);
 //giving id to the variable
 greeting.id('hl');
-greeting = createElement('h2', 'Carnivores alive:  '+carnivores.length);
+greeting = createElement('h2', 'CARNIVORES ALIVE:  '+carnivores.length);
 //giving id to the variable
 greeting.id('cl');}
 //function for buttons, aftfer clicking them the the mouse cursor will create different things on the screen
